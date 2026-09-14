@@ -1,97 +1,129 @@
 import SwiftUI
+import SwiftData
 
 struct PipelineView: View {
     @Environment(\.modelContext) private var modelContext
-    @StateObject private var viewModel: PipelineViewModel
-    
-    init() {
-        let repo = ApplicationRepository(modelContext: ModelContext.shared)
-        self._viewModel = StateObject(wrappedValue: PipelineViewModel(repository: repo))
-    }
-    
+
+    @Query(
+        sort: \JobApplication.appliedDate,
+        order: .reverse
+    )
+    private var applications: [JobApplication]
+
+    @State private var showAddApplication = false
+    @State private var selectedApplication: JobApplication?
+
     var body: some View {
         VStack(spacing: 0) {
-            // Header
-            HSTACK {
-                Text("Application Pipeline")
-                    .font(.title2)
-                    .neonGreenText()
-                
-                Spacer()
-                
-                Button(action: { viewModel.showAddApplication = true }) {
-                    Image(systemName: "plus")
-                        .font(.title2)
-                        .foregroundColor(ColorTokens.primaryGreen)
-                }
-            }
-            .padding()
-            
-            // Pipeline Columns
+            header
+
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: Spacing.medium) {
-                    ForEach(ApplicationStage.allCases, id: \.self) { stage in
+                HStack(
+                    alignment: .top,
+                    spacing: Spacing.medium
+                ) {
+                    ForEach(ApplicationStage.allCases) { stage in
                         StageColumnView(
                             stage: stage,
-                            applications: viewModel.applications(byStage: stage),
+                            applications: applications(for: stage),
                             onApplicationTap: { application in
-                                viewModel.selectedApplication = application
-                                viewModel.showDetail = true
+                                selectedApplication = application
                             },
                             onStageChange: { application, newStage in
-                                viewModel.moveApplication(application, to: newStage)
+                                moveApplication(
+                                    application,
+                                    to: newStage
+                                )
                             }
                         )
                     }
                 }
                 .padding(.horizontal)
+                .padding(.vertical, Spacing.small)
             }
-            .padding(.vertical, Spacing.small)
         }
-        .background(ColorTokens.background.ignoresSafeArea())
-        .sheet(isPresented: $viewModel.showAddApplication) {
-            AddApplicationView(viewModel: AddApplicationViewModel(repository: ApplicationRepository(modelContext: ModelContext.shared)))
+        .background(
+            ColorTokens.background.ignoresSafeArea()
+        )
+        .sheet(isPresented: $showAddApplication) {
+            NavigationStack {
+                AddApplicationView(
+                    viewModel: AddApplicationViewModel(
+                        repository: ApplicationRepository(
+                            modelContext: modelContext
+                        )
+                    )
+                )
+            }
         }
-        .sheet(isPresented: $viewModel.showDetail, item: $viewModel.selectedApplication) { application in
+        .sheet(item: $selectedApplication) { application in
             NavigationStack {
                 ApplicationDetailView(application: application)
-                    .environment(\.modelContext, modelContext)
             }
         }
     }
-}
 
-// MARK: - ViewModel
-final class PipelineViewModel: ObservableObject {
-    @Published var applications: [JobApplication] = []
-    @Published var showAddApplication = false
-    @Published var showDetail = false
-    @Published var selectedApplication: JobApplication?
-    
-    private let repository: ApplicationRepositoryProtocol
-    
-    init(repository: ApplicationRepositoryProtocol) {
-        self.repository = repository
-        loadApplications()
+    private var header: some View {
+        HStack {
+            Text("APPLICATION PIPELINE")
+                .font(
+                    .system(
+                        size: 18,
+                        weight: .bold,
+                        design: .monospaced
+                    )
+                )
+                .foregroundStyle(ColorTokens.primaryGreen)
+                .shadow(
+                    color: ColorTokens.primaryGreen.opacity(0.30),
+                    radius: 4,
+                    x: 0,
+                    y: 0
+                )
+
+            Spacer()
+
+            Button {
+                showAddApplication = true
+            } label: {
+                Image(systemName: "plus")
+                    .font(.title2.weight(.semibold))
+                    .foregroundStyle(ColorTokens.primaryGreen)
+                    .frame(width: 44, height: 44)
+                    .background(ColorTokens.surface)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(
+                                ColorTokens.borderGreen,
+                                lineWidth: 1
+                            )
+                    }
+            }
+            .accessibilityLabel("Add job application")
+        }
+        .padding()
     }
-    
-    func loadApplications() {
-        applications = repository.fetchApplications()
+
+    private func applications(
+        for stage: ApplicationStage
+    ) -> [JobApplication] {
+        applications.filter { application in
+            application.stage == stage
+        }
     }
-    
-    func applications(byStage stage: ApplicationStage) -> [JobApplication] {
-        repository.fetchApplications(byStage: stage)
-    }
-    
-    func moveApplication(_ application: JobApplication, to newStage: ApplicationStage) {
-        var updatedApp = application
-        updatedApp.stage = newStage
-        repository.updateApplication(updatedApp)
-        loadApplications()
-    }
-    
-    func addApplication(_ application: JobApplication) {
-        repository.saveApplication(application)
-        loadApplications()
+
+    private func moveApplication(
+        _ application: JobApplication,
+        to newStage: ApplicationStage
+    ) {
+        application.stage = newStage
+
+        do {
+            try modelContext.save()
+        } catch {
+            print(
+                "Unable to update application stage: \(error)"
+            )
+        }
     }
 }

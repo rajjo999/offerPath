@@ -2,133 +2,201 @@ import Foundation
 import SwiftData
 
 enum PreviewData {
+
     static let modelContainer: ModelContainer = {
         let schema = Schema([
             JobApplication.self,
             StoredCalendarEvent.self
         ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
-        
+
+        let configuration = ModelConfiguration(
+            schema: schema,
+            isStoredInMemoryOnly: true
+        )
+
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            return try ModelContainer(
+                for: schema,
+                configurations: [configuration]
+            )
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError(
+                "Could not create preview ModelContainer: \(error)"
+            )
         }
     }()
-    
+
     static let sampleApplications: [JobApplication] = [
         JobApplication(
             company: "Apple Inc.",
             position: "Senior iOS Engineer",
             stage: .applied,
-            appliedDate: Date().addingTimeInterval(-86400 * 2),
-            notes: "Applied through Apple Careers site. Referral from internal employee.",
-            jobDescription: "We are looking for a passionate iOS engineer to work on innovative features for iOS 18 and beyond...",
+            appliedDate: date(daysFromNow: -2),
+            notes: "Applied through Apple Careers. Referral from an internal employee.",
+            jobDescription: "Build innovative iOS features and collaborate with product and design teams.",
             salaryRange: "$160k - $200k",
-            location: "Cupertino, CA (Hybrid)",
-            followUpDate: Date().addingTimeInterval(86400 * 3),
-            interviewDate: Date().addingTimeInterval(86400 * 7),
+            location: "Cupertino, CA · Hybrid",
+            followUpDate: date(daysFromNow: 3),
+            interviewDate: date(daysFromNow: 7),
             recruiterName: "Sarah Chen",
             recruiterEmail: "s.chen@apple.com",
             resumeVersion: "v2.1",
             coverLetterVersion: "v1.5"
         ),
+
         JobApplication(
             company: "Google",
             position: "Mobile Software Engineer",
             stage: .recruiterScreen,
-            appliedDate: Date().addingTimeInterval(-86400 * 5),
-            notes: "Recruiter reached out via LinkedIn. Phone screen scheduled.",
-            jobDescription: "Join our Android team to build next-generation features for billions of users...",
+            appliedDate: date(daysFromNow: -5),
+            notes: "Recruiter reached out. Phone screen is scheduled.",
+            jobDescription: "Build next-generation mobile features used by people worldwide.",
             salaryRange: "$140k - $180k",
-            location: "Mountain View, CA (Hybrid)",
-            followUpDate: Date().addingTimeInterval(86400),
-            interviewDate: Date().addingTimeInterval(86400 * 4),
+            location: "Mountain View, CA · Hybrid",
+            followUpDate: date(daysFromNow: 1),
+            interviewDate: date(daysFromNow: 4),
             recruiterName: "Marcus Rodriguez",
             recruiterEmail: "m.rodriguez@google.com",
             resumeVersion: "v1.8",
             coverLetterVersion: "v1.2"
         ),
+
         JobApplication(
             company: "Shopify",
             position: "iOS Developer",
             stage: .interview,
-            appliedDate: Date().addingTimeInterval(-86400 * 12),
-            notes: "Technical interview completed. Waiting for system design round.",
-            jobDescription: "Help entrepreneurs succeed by building commerce tools for iOS merchants...",
+            appliedDate: date(daysFromNow: -12),
+            notes: "Technical interview completed. Waiting for the system-design round.",
+            jobDescription: "Build commerce tools and mobile experiences for entrepreneurs.",
             salaryRange: "$130k - $160k",
-            location: "Remote (Canada)",
-            followUpDate: Date().addingTimeInterval(86400),
-            interviewDate: Date().addingTimeInterval(86400 * 2),
+            location: "Remote · Canada",
+            followUpDate: date(daysFromNow: 1),
+            interviewDate: date(daysFromNow: 2),
             recruiterName: "Emily Wong",
             recruiterEmail: "e.wong@shopify.com",
             resumeVersion: "v2.0",
             coverLetterVersion: "v1.0"
         ),
+
         JobApplication(
             company: "Netflix",
             position: "Senior iOS Engineer",
             stage: .offer,
-            appliedDate: Date().addingTimeInterval(-86400 * 25),
-            notes: "Received offer! Negotiating equity and signing bonus.",
-            jobDescription: "Build features for the Netflix iOS app used by millions of subscribers daily...",
-            salaryRange: "$180k - $220k + 0.05% equity",
-            location: "Los Gatos, CA (Remote)",
-            interviewDate: Date().addingTimeInterval(-86400 * 10),
+            appliedDate: date(daysFromNow: -25),
+            notes: "Received an offer. Negotiating equity and signing bonus.",
+            jobDescription: "Build premium mobile features for a global streaming product.",
+            salaryRange: "$180k - $220k + equity",
+            location: "Los Gatos, CA · Remote",
+            followUpDate: nil,
+            interviewDate: date(daysFromNow: -10),
             recruiterName: "David Kim",
             recruiterEmail: "d.kim@netflix.com",
             resumeVersion: "v3.0",
             coverLetterVersion: "v2.0"
         ),
+
         JobApplication(
             company: "StartupXYZ",
             position: "Full Stack Engineer",
             stage: .rejected,
-            appliedDate: Date().addingTimeInterval(-86400 * 30),
-            notes: "Position filled internally. Encouraged to apply for future openings.",
-            jobDescription: "Early-stage fintech startup looking for versatile full-stack engineer...",
+            appliedDate: date(daysFromNow: -30),
+            notes: "Position was filled internally. Apply again for future openings.",
+            jobDescription: "Early-stage fintech startup seeking a versatile full-stack engineer.",
             salaryRange: "$100k - $130k",
-            location: "Toronto, ON (Hybrid)",
-            interviewDate: Date().addingTimeInterval(-86400 * 20),
+            location: "Toronto, ON · Hybrid",
+            followUpDate: nil,
+            interviewDate: date(daysFromNow: -20),
             recruiterName: "Lisa Patel",
             recruiterEmail: "l.patel@startupxyz.com",
             resumeVersion: "v1.5",
             coverLetterVersion: "v1.0"
         )
     ]
-    
+
     static let sampleCalendarEvents: [StoredCalendarEvent] = [
         StoredCalendarEvent(
-            title: "Technical Interview - Apple",
-            startDate: Date().addingTimeInterval(86400 * 4),
-            endDate: Date().addingTimeInterval(86400 * 4.5),
-            eventType: .interview,
-            notes: "Whiteboard coding + system design discussion",
-            sourceIdentifier: "apple_interview_001"
+            eventIdentifier: "apple_interview_001",
+            title: "Technical Interview · Apple",
+            startDate: date(daysFromNow: 4),
+            endDate: date(daysFromNow: 4, addingMinutes: 90),
+            calendarName: "OfferPath",
+            location: "Video call",
+            notes: "Whiteboard coding and system-design discussion.",
+            eventType: .interview
         ),
+
         StoredCalendarEvent(
-            title: "Follow-up with Marcus - Google",
-            startDate: Date().addingTimeInterval(86400),
-            endDate: Date().addingTimeInterval(86400 + 1800),
-            eventType: .followUp,
-            notes: "Check on recruiter feedback and next steps",
-            sourceIdentifier: "google_followup_002"
+            eventIdentifier: "google_followup_002",
+            title: "Follow-up · Marcus at Google",
+            startDate: date(daysFromNow: 1),
+            endDate: date(daysFromNow: 1, addingMinutes: 30),
+            calendarName: "OfferPath",
+            location: nil,
+            notes: "Check recruiter feedback and next steps.",
+            eventType: .followUp
         ),
+
         StoredCalendarEvent(
-            title: "System Design Round - Shopify",
-            startDate: Date().addingTimeInterval(86400 * 2),
-            endDate: Date().addingTimeInterval(86400 * 2.5),
-            eventType: .interview,
-            notes: "Architecture discussion for commerce platform",
-            sourceIdentifier: "shopify_interview_003"
+            eventIdentifier: "shopify_interview_003",
+            title: "System Design Round · Shopify",
+            startDate: date(daysFromNow: 2),
+            endDate: date(daysFromNow: 2, addingMinutes: 90),
+            calendarName: "OfferPath",
+            location: "Google Meet",
+            notes: "Architecture discussion for a commerce platform.",
+            eventType: .interview
         ),
+
         StoredCalendarEvent(
-            title: "Networking - Toronto iOS Meetup",
-            startDate: Date().addingTimeInterval(86400 * 3),
-            endDate: Date().addingTimeInterval(86400 * 3.5),
-            eventType: .networking,
-            notes: "Monthly meetup for iOS developers in Toronto",
-            sourceIdentifier: "toronto_meetup_004"
+            eventIdentifier: "toronto_meetup_004",
+            title: "Networking · Toronto iOS Meetup",
+            startDate: date(daysFromNow: 3),
+            endDate: date(daysFromNow: 3, addingMinutes: 90),
+            calendarName: "Personal",
+            location: "Toronto, ON",
+            notes: "Monthly meetup for iOS developers.",
+            eventType: .networking
         )
     ]
+
+    @MainActor
+    static func makePreviewContainerWithSampleData() -> ModelContainer {
+        let container = modelContainer
+        let context = container.mainContext
+
+        for application in sampleApplications {
+            context.insert(application)
+        }
+
+        for event in sampleCalendarEvents {
+            context.insert(event)
+        }
+
+        do {
+            try context.save()
+        } catch {
+            print("Failed to insert preview data: \(error)")
+        }
+
+        return container
+    }
+
+    private static func date(
+        daysFromNow: Int,
+        addingMinutes minutes: Int = 0
+    ) -> Date {
+        let startOfToday = Calendar.current.startOfDay(for: Date())
+
+        let dayDate = Calendar.current.date(
+            byAdding: .day,
+            value: daysFromNow,
+            to: startOfToday
+        ) ?? Date()
+
+        return Calendar.current.date(
+            byAdding: .minute,
+            value: minutes,
+            to: dayDate
+        ) ?? dayDate
+    }
 }

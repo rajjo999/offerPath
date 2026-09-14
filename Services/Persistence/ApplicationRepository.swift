@@ -3,7 +3,9 @@ import SwiftData
 
 protocol ApplicationRepositoryProtocol {
     func fetchApplications() -> [JobApplication]
-    func fetchApplications(byStage stage: ApplicationStage) -> [JobApplication]
+    func fetchApplications(
+        byStage stage: ApplicationStage
+    ) -> [JobApplication]
     func saveApplication(_ application: JobApplication)
     func updateApplication(_ application: JobApplication)
     func deleteApplication(_ application: JobApplication)
@@ -11,58 +13,107 @@ protocol ApplicationRepositoryProtocol {
     func countByStage(_ stage: ApplicationStage) -> Int
 }
 
-final class ApplicationRepository: ApplicationRepositoryProtocol {
+@MainActor
+final class ApplicationRepository:
+    ApplicationRepositoryProtocol
+{
     private let modelContext: ModelContext
-    
+
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
     }
-    
+
     func fetchApplications() -> [JobApplication] {
         let descriptor = FetchDescriptor<JobApplication>(
-            sortBy: [SortDescriptor(\.appliedDate, order: .reverse)]
+            sortBy: [
+                SortDescriptor<JobApplication>(
+                    \.appliedDate,
+                    order: .reverse
+                )
+            ]
         )
-        return (try? modelContext.fetch(descriptor)) ?? []
+
+        do {
+            return try modelContext.fetch(descriptor)
+        } catch {
+            print("Failed to fetch applications: \(error)")
+            return []
+        }
     }
-    
-    func fetchApplications(byStage stage: ApplicationStage) -> [JobApplication] {
+
+    func fetchApplications(
+        byStage stage: ApplicationStage
+    ) -> [JobApplication] {
         let descriptor = FetchDescriptor<JobApplication>(
-            predicate: #Predicate { $0.stage == stage },
-            sortBy: [SortDescriptor(\.appliedDate, order: .reverse)]
+            sortBy: [
+                SortDescriptor<JobApplication>(
+                    \.appliedDate,
+                    order: .reverse
+                )
+            ]
         )
-        return (try? modelContext.fetch(descriptor)) ?? []
+
+        do {
+            let applications = try modelContext.fetch(descriptor)
+
+            return applications.filter { application in
+                application.stage == stage
+            }
+        } catch {
+            print(
+                "Failed to fetch applications by stage: \(error)"
+            )
+            return []
+        }
     }
-    
+
     func saveApplication(_ application: JobApplication) {
         modelContext.insert(application)
-        save()
+        saveContext()
     }
-    
+
     func updateApplication(_ application: JobApplication) {
-        save()
+        saveContext()
     }
-    
+
     func deleteApplication(_ application: JobApplication) {
         modelContext.delete(application)
-        save()
+        saveContext()
     }
-    
+
     func applicationCount() -> Int {
-        (try? modelContext.count(FetchDescriptor<JobApplication>())) ?? 0
+        let descriptor = FetchDescriptor<JobApplication>()
+
+        do {
+            return try modelContext.fetchCount(descriptor)
+        } catch {
+            print("Failed to count applications: \(error)")
+            return 0
+        }
     }
-    
+
     func countByStage(_ stage: ApplicationStage) -> Int {
-        let descriptor = FetchDescriptor<JobApplication>(
-            predicate: #Predicate { $0.stage == stage }
-        )
-        return (try? modelContext.count(descriptor)) ?? 0
+        let descriptor = FetchDescriptor<JobApplication>()
+
+        do {
+            let applications = try modelContext.fetch(descriptor)
+
+            return applications.filter { application in
+                application.stage == stage
+            }.count
+        } catch {
+            print(
+                "Failed to count applications by stage: \(error)"
+            )
+            return 0
+        }
     }
-    
-    private func save() {
+
+    private func saveContext() {
         do {
             try modelContext.save()
         } catch {
-            print("Failed to save context: \(error)")
+            print("Failed to save application context: \(error)")
         }
     }
 }

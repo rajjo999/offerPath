@@ -1,62 +1,55 @@
 import Foundation
-import EventKit
+import SwiftData
 
-enum CalendarEventType: String, Codable, CaseIterable {
+enum JobEventType: String, Codable, CaseIterable, Identifiable {
     case interview = "Interview"
     case recruiterCall = "Recruiter Call"
     case networking = "Networking"
     case followUp = "Follow-up"
     case other = "Other"
-    
-    var icon: String {
-        switch self {
-        case .interview: return "person.2.wave.2"
-        case .recruiterCall: return "phone"
-        case .networking: return "person.3"
-        case .followUp: return "arrow.uturn.backward"
-        case .other: return "ellipsis"
-        }
-    }
-    
-    var color: Color {
-        switch self {
-        case .interview: return ColorTokens.primaryGreen
-        case .recruiterCall: return ColorTokens.highlightGreen
-        case .networking: return ColorTokens.warning
-        case .followUp: return ColorTokens.dimGreen
-        case .other: return ColorTokens.secondaryText
-        }
+
+    var id: String {
+        rawValue
     }
 }
 
 @Model
 final class StoredCalendarEvent {
-    @Attribute(.unique) var id: UUID
+    var eventIdentifier: String
     var title: String
     var startDate: Date
     var endDate: Date
-    var eventType: CalendarEventType
-    var notes: String
-    var isAllDay: Bool
-    var sourceIdentifier: String? // For linking back to original calendar event
-    
+    var calendarName: String
+    var location: String?
+    var notes: String?
+    var eventTypeRawValue: String
+
     init(
-        id: UUID = UUID(),
+        eventIdentifier: String,
         title: String,
         startDate: Date,
         endDate: Date,
-        eventType: CalendarEventType,
-        notes: String = "",
-        isAllDay: Bool = false,
-        sourceIdentifier: String? = nil
+        calendarName: String,
+        location: String? = nil,
+        notes: String? = nil,
+        eventType: JobEventType = .other
     ) {
-        self.id = id
+        self.eventIdentifier = eventIdentifier
         self.title = title
         self.startDate = startDate
         self.endDate = endDate
-        self.eventType = eventType
+        self.calendarName = calendarName
+        self.location = location
         self.notes = notes
-        self.isAllDay = isAllDay
-        self.sourceIdentifier = sourceIdentifier
+        self.eventTypeRawValue = eventType.rawValue
+    }
+
+    var eventType: JobEventType {
+        get {
+            JobEventType(rawValue: eventTypeRawValue) ?? .other
+        }
+        set {
+            eventTypeRawValue = newValue.rawValue
+        }
     }
 }

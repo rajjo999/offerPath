@@ -3,45 +3,70 @@ import SwiftUI
 struct AddApplicationView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: AddApplicationViewModel
-    
+
     init(viewModel: AddApplicationViewModel) {
-        self._viewModel = StateObject(wrappedValue: viewModel)
+        _viewModel = StateObject(
+            wrappedValue: viewModel
+        )
     }
-    
+
     var body: some View {
         NavigationStack {
             Form {
-                Section("Position & Company") {
-                    TextField("Position", text: $viewModel.position)
-                    TextField("Company", text: $viewModel.company)
+                Section("POSITION & COMPANY") {
+                    TextField(
+                        "Position",
+                        text: $viewModel.position
+                    )
+
+                    TextField(
+                        "Company",
+                        text: $viewModel.company
+                    )
                 }
-                
-                Section("Details") {
-                    TextField("Location (Optional)", text: $viewModel.location)
-                    TextField("Salary Range (Optional)", text: $viewModel.salaryRange)
+
+                Section("DETAILS") {
+                    TextField(
+                        "Salary Range (Optional)",
+                        text: $viewModel.salaryRange
+                    )
+
+                    TextField(
+                        "Location (Optional)",
+                        text: $viewModel.location
+                    )
                 }
-                
-                Section("Stage") {
-                    Picker("Current Stage", selection: $viewModel.stage) {
-                        ForEach(ApplicationStage.allCases, id: \.self) { stage in
-                            Text(stage.displayName).tag(stage)
+
+                Section("STAGE") {
+                    Picker(
+                        "Current Stage",
+                        selection: $viewModel.stage
+                    ) {
+                        ForEach(
+                            ApplicationStage.allCases
+                        ) { stage in
+                            Text(stage.displayName)
+                                .tag(stage)
                         }
                     }
-                    .pickerStyle(.segmented)
+                    .pickerStyle(.menu)
                 }
-                
-                Section("Notes (Optional)") {
+
+                Section("NOTES (OPTIONAL)") {
                     TextEditor(text: $viewModel.notes)
-                        .frame(height: 80)
+                        .frame(minHeight: 100)
                 }
             }
-            .navigationTitle("New Application")
+            .navigationTitle("NEW APPLICATION")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationActionLeading) {
-                    Button("Cancel") { dismiss() }
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
                 }
-                ToolbarItem(placement: .confirmationActionTrailing) {
+
+                ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
                         viewModel.saveApplication()
                         dismiss()
@@ -53,35 +78,52 @@ struct AddApplicationView: View {
     }
 }
 
-// MARK: - ViewModel
+@MainActor
 final class AddApplicationViewModel: ObservableObject {
-    @Published var position: String = ""
-    @Published var company: String = ""
-    @Published var location: String = ""
-    @Published var salaryRange: String = ""
-    @Published var notes: String = ""
+    @Published var position = ""
+    @Published var company = ""
+    @Published var location = ""
+    @Published var salaryRange = ""
+    @Published var notes = ""
     @Published var stage: ApplicationStage = .applied
-    
+
     private let repository: ApplicationRepositoryProtocol
-    
+
     init(repository: ApplicationRepositoryProtocol) {
         self.repository = repository
     }
-    
+
     var isValid: Bool {
-        !position.isEmpty && !company.isEmpty
+        !position.trimmingCharacters(
+            in: .whitespacesAndNewlines
+        ).isEmpty &&
+        !company.trimmingCharacters(
+            in: .whitespacesAndNewlines
+        ).isEmpty
     }
-    
+
     func saveApplication() {
         let application = JobApplication(
-            company: company,
-            position: position,
+            company: company.trimmingCharacters(
+                in: .whitespacesAndNewlines
+            ),
+            position: position.trimmingCharacters(
+                in: .whitespacesAndNewlines
+            ),
             stage: stage,
             appliedDate: Date(),
             notes: notes,
-            location: location.isEmpty ? nil : location,
-            salaryRange: salaryRange.isEmpty ? nil : salaryRange
+            jobDescription: "",
+            salaryRange: salaryRange,
+            location: location,
+            followUpDate: nil,
+            interviewDate: nil,
+            recruiterName: "",
+            recruiterEmail: "",
+            resumeVersion: "",
+            coverLetterVersion: ""
         )
+
         repository.saveApplication(application)
     }
 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ApplicationCard: View {
+struct ApplicationCardView: View {
     let application: JobApplication
     let onTap: () -> Void
     let onStageChange: (ApplicationStage) -> Void
@@ -22,9 +22,7 @@ struct ApplicationCard: View {
                             design: .monospaced
                         )
                     )
-                    .foregroundStyle(
-                        ColorTokens.highlightGreen
-                    )
+                    .foregroundStyle(ColorTokens.highlightGreen)
                     .lineLimit(2)
 
                 Text(application.company)
@@ -35,17 +33,13 @@ struct ApplicationCard: View {
                             design: .monospaced
                         )
                     )
-                    .foregroundStyle(
-                        ColorTokens.secondaryText
-                    )
+                    .foregroundStyle(ColorTokens.secondaryText)
                     .lineLimit(1)
             }
 
             Spacer(minLength: 4)
 
-            HStack(
-                spacing: Spacing.xSmall
-            ) {
+            HStack(spacing: Spacing.xSmall) {
                 Text(application.stage.displayName)
                     .font(
                         .system(
@@ -60,9 +54,7 @@ struct ApplicationCard: View {
                     .overlay {
                         RoundedRectangle(cornerRadius: 4)
                             .stroke(
-                                application.stage.color.opacity(
-                                    0.6
-                                ),
+                                application.stage.color.opacity(0.6),
                                 lineWidth: 1
                             )
                     }
@@ -75,9 +67,7 @@ struct ApplicationCard: View {
                             design: .monospaced
                         )
                     )
-                    .foregroundStyle(
-                        ColorTokens.secondaryText
-                    )
+                    .foregroundStyle(ColorTokens.secondaryText)
             }
 
             Spacer(minLength: 4)
@@ -88,53 +78,45 @@ struct ApplicationCard: View {
                 } label: {
                     Image(systemName: "chevron.right")
                         .font(.caption)
-                        .foregroundStyle(
-                            ColorTokens.primaryGreen
-                        )
+                        .foregroundStyle(ColorTokens.primaryGreen)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(
-                    "Open application details"
-                )
+                .accessibilityLabel("Open application details")
 
                 Spacer()
 
                 Menu {
-                    stageMenuButton(
-                        title: "Move to Applied",
+                    stageButton(
+                        "Move to Applied",
                         stage: .applied
                     )
 
-                    stageMenuButton(
-                        title: "Move to Recruiter Screen",
+                    stageButton(
+                        "Move to Recruiter Screen",
                         stage: .recruiterScreen
                     )
 
-                    stageMenuButton(
-                        title: "Move to Interview",
+                    stageButton(
+                        "Move to Interview",
                         stage: .interview
                     )
 
-                    stageMenuButton(
-                        title: "Move to Offer",
+                    stageButton(
+                        "Move to Offer",
                         stage: .offer
                     )
 
-                    stageMenuButton(
-                        title: "Move to Rejected",
+                    stageButton(
+                        "Move to Rejected",
                         stage: .rejected
                     )
                 } label: {
                     Image(systemName: "ellipsis.circle")
                         .font(.caption)
-                        .foregroundStyle(
-                            ColorTokens.secondaryText
-                        )
+                        .foregroundStyle(ColorTokens.secondaryText)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel(
-                    "Change application stage"
-                )
+                .accessibilityLabel("Change application stage")
             }
         }
         .padding(Spacing.medium)
@@ -152,7 +134,7 @@ struct ApplicationCard: View {
                 )
         }
         .shadow(
-            color: ColorTokens.primaryGreen.opacity(0.1),
+            color: ColorTokens.primaryGreen.opacity(0.10),
             radius: 2,
             x: 0,
             y: 0
@@ -162,36 +144,36 @@ struct ApplicationCard: View {
             onTap()
         }
         .contextMenu {
-            stageMenuButton(
-                title: "Move to Applied",
+            stageButton(
+                "Move to Applied",
                 stage: .applied
             )
 
-            stageMenuButton(
-                title: "Move to Recruiter Screen",
+            stageButton(
+                "Move to Recruiter Screen",
                 stage: .recruiterScreen
             )
 
-            stageMenuButton(
-                title: "Move to Interview",
+            stageButton(
+                "Move to Interview",
                 stage: .interview
             )
 
-            stageMenuButton(
-                title: "Move to Offer",
+            stageButton(
+                "Move to Offer",
                 stage: .offer
             )
 
-            stageMenuButton(
-                title: "Move to Rejected",
+            stageButton(
+                "Move to Rejected",
                 stage: .rejected
             )
         }
     }
 
     @ViewBuilder
-    private func stageMenuButton(
-        title: String,
+    private func stageButton(
+        _ title: String,
         stage: ApplicationStage
     ) -> some View {
         Button(title) {
