@@ -50,7 +50,7 @@ struct StageColumnView: View {
         ) {
             HStack {
                 Image(systemName: stage.icon)
-                    .font(.system(size: 14))
+                    .font(Typography.icon14)
                     .foregroundStyle(stage.color)
 
                 Text(stage.displayName)

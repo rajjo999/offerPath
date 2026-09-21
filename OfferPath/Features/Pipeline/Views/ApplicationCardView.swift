@@ -1,9 +1,45 @@
 import SwiftUI
 
+final class DateProvider: ObservableObject {
+    static let shared = DateProvider()
+    @Published var currentDate = Date()
+    private var timer: Timer?
+    private let calendar = Calendar.current
+    private init() {
+        setupTimer()
+    }
+    private func setupTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true) { [weak self] _ in
+            self?.checkDateChange()
+        }
+        checkDateChange()
+    }
+    private func checkDateChange() {
+        let now = Date()
+        let startOfToday = calendar.startOfDay(for: now)
+        if let lastUpdateDate = self.lastUpdateDate {
+            let startOfLastUpdateDay = calendar.startOfDay(for: lastUpdateDate)
+            if startOfToday != startOfLastUpdateDay {
+                // Day changed
+                currentDate = now
+                self.lastUpdateDate = now
+                return
+               }
+        } else {
+            // First time
+            currentDate = now
+            self.lastUpdateDate = now
+        }
+    }
+    private var lastUpdateDate: Date?
+}
+
 struct ApplicationCardView: View {
     let application: JobApplication
     let onTap: () -> Void
     let onStageChange: (ApplicationStage) -> Void
+
+    @StateObject private var dateProvider = DateProvider.shared
 
     var body: some View {
         VStack(
@@ -182,12 +218,12 @@ struct ApplicationCardView: View {
     }
 
     private var daysSinceApplied: Int {
-        let days = Calendar.current.dateComponents(
+        let calendar = Calendar.current
+        let days = calendar.dateComponents(
             [.day],
             from: application.appliedDate,
-            to: Date()
+            to: dateProvider.currentDate
         ).day ?? 0
-
         return max(days, 0)
     }
 }
