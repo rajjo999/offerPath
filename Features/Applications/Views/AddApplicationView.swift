@@ -11,68 +11,66 @@ struct AddApplicationView: View {
     }
 
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("POSITION & COMPANY") {
-                    TextField(
-                        "Position",
-                        text: $viewModel.position
-                    )
+        Form {
+            Section("POSITION & COMPANY") {
+                TextField(
+                    "Position",
+                    text: $viewModel.position
+                )
 
-                    TextField(
-                        "Company",
-                        text: $viewModel.company
-                    )
-                }
+                TextField(
+                    "Company",
+                    text: $viewModel.company
+                )
+            }
 
-                Section("DETAILS") {
-                    TextField(
-                        "Salary Range (Optional)",
-                        text: $viewModel.salaryRange
-                    )
+            Section("DETAILS") {
+                TextField(
+                    "Salary Range (Optional)",
+                    text: $viewModel.salaryRange
+                )
 
-                    TextField(
-                        "Location (Optional)",
-                        text: $viewModel.location
-                    )
-                }
+                TextField(
+                    "Location (Optional)",
+                    text: $viewModel.location
+                )
+            }
 
-                Section("STAGE") {
-                    Picker(
-                        "Current Stage",
-                        selection: $viewModel.stage
-                    ) {
-                        ForEach(
-                            ApplicationStage.allCases
-                        ) { stage in
-                            Text(stage.displayName)
-                                .tag(stage)
-                        }
+            Section("STAGE") {
+                Picker(
+                    "Current Stage",
+                    selection: $viewModel.stage
+                ) {
+                    ForEach(
+                        ApplicationStage.allCases
+                    ) { stage in
+                        Text(stage.displayName)
+                            .tag(stage)
                     }
-                    .pickerStyle(.menu)
                 }
+                .pickerStyle(.menu)
+            }
 
-                Section("NOTES (OPTIONAL)") {
-                    TextEditor(text: $viewModel.notes)
-                        .frame(minHeight: 100)
+            Section("NOTES (OPTIONAL)") {
+                TextEditor(text: $viewModel.notes)
+                    .frame(minHeight: 100)
+            }
+        }
+        .navigationTitle("NEW APPLICATION")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button("Cancel") {
+                    dismiss()
                 }
             }
-            .navigationTitle("NEW APPLICATION")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
 
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        viewModel.saveApplication()
-                        dismiss()
-                    }
-                    .disabled(!viewModel.isValid)
+            ToolbarItem(placement: .confirmationAction) {
+                Button("Save") {
+                    viewModel.saveApplication()
+                    dismiss()
                 }
+                .disabled(!viewModel.isValid)
             }
         }
     }
@@ -89,8 +87,12 @@ final class AddApplicationViewModel: ObservableObject {
 
     private let repository: ApplicationRepositoryProtocol
 
-    init(repository: ApplicationRepositoryProtocol) {
+    init(
+        repository: ApplicationRepositoryProtocol,
+        initialStage: ApplicationStage = .applied
+    ) {
         self.repository = repository
+        self.stage = initialStage
     }
 
     var isValid: Bool {

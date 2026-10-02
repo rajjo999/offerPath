@@ -1,6 +1,6 @@
 name: OfferPath
 options:
-  bundleIdPrefix: com.yourname
+  bundleIdPrefix: com.ranbir
   deploymentTarget:
     iOS: "17.0"
 
@@ -18,7 +18,7 @@ targets:
       - Services
     settings:
       INFOPLIST_FILE: OfferPath/App/Info.plist
-      PRODUCT_BUNDLE_IDENTIFIER: com.yourname.offerpath
+      PRODUCT_BUNDLE_IDENTIFIER: com.ranbir.offerpath
       SWIFT_VERSION: "5.0"
       CLANG_ENABLE_MODULES: YES
       ENABLE_BITCODE: NO

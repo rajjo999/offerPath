@@ -24,33 +24,12 @@ struct TabViewContainer: View {
                     )
                 }
 
-            Text("Calendar")
-                .foregroundStyle(ColorTokens.primaryGreen)
+            WeeklyDashboardView()
                 .tag(2)
-                .tabItem {
-                    Label(
-                        "Calendar",
-                        systemImage: "calendar"
-                    )
-                }
-
-            Text("Practice")
-                .foregroundStyle(ColorTokens.primaryGreen)
-                .tag(3)
                 .tabItem {
                     Label(
                         "Practice",
                         systemImage: "doc.text.magnifyingglass"
-                    )
-                }
-
-            Text("Settings")
-                .foregroundStyle(ColorTokens.primaryGreen)
-                .tag(4)
-                .tabItem {
-                    Label(
-                        "Settings",
-                        systemImage: "gearshape.fill"
                     )
                 }
         }

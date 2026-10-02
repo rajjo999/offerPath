@@ -2,6 +2,11 @@ import SwiftUI
 import SwiftData
 
 struct HomeDashboardView: View {
+    @Environment(\.modelContext) private var modelContext
+
+    @State private var showAddApplication = false
+    @State private var presetStage: ApplicationStage = .applied
+
     @Query(
         sort: \JobApplication.appliedDate,
         order: .reverse
@@ -107,6 +112,18 @@ struct HomeDashboardView: View {
             ColorTokens.background
                 .ignoresSafeArea()
         )
+        .sheet(isPresented: $showAddApplication) {
+            NavigationStack {
+                AddApplicationView(
+                    viewModel: AddApplicationViewModel(
+                        repository: ApplicationRepository(
+                            modelContext: modelContext
+                        ),
+                        initialStage: presetStage
+                    )
+                )
+            }
+        }
     }
 
     private var headerSection: some View {
@@ -139,7 +156,8 @@ struct HomeDashboardView: View {
             Spacer()
 
             Button {
-                // Add navigation here later.
+                presetStage = .applied
+                showAddApplication = true
             } label: {
                 Image(systemName: "plus.circle.fill")
                     .font(.title2)
@@ -294,7 +312,8 @@ struct HomeDashboardView: View {
                         ApplicationStage.allCases.prefix(4)
                     ) { stage in
                         Button {
-                            // Add navigation with preset stage later.
+                            presetStage = stage
+                            showAddApplication = true
                         } label: {
                             VStack(spacing: Spacing.xSmall) {
                                 Image(systemName: stage.icon)
