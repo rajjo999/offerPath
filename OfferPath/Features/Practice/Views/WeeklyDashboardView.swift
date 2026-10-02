@@ -1,6 +1,39 @@
 import SwiftUI
 import SwiftData
 
+struct PracticeCard: View {
+    let title: String
+    let description: String
+    let icon: String
+    let color: Color
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(spacing: 8) {
+                Image(systemName: icon)
+                    .foregroundStyle(color)
+                    .font(.system(size: 18))
+
+                Text(title)
+                    .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                    .foregroundStyle(ColorTokens.highlightGreen)
+            }
+
+            Text(description)
+                .font(.system(size: 12, weight: .regular, design: .monospaced))
+                .foregroundStyle(ColorTokens.secondaryText)
+                .lineLimit(3)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
+        .background(ColorTokens.surface)
+        .overlay {
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(ColorTokens.borderGreen.opacity(0.5), lineWidth: 1)
+        }
+    }
+}
+
 struct WeeklyDashboardView: View {
     @Query(
         sort: \JobApplication.appliedDate,
@@ -144,7 +177,7 @@ struct WeeklyDashboardView: View {
     private var coachSection: some View {
         VStack(
             alignment: .leading,
-            spacing: 12
+            spacing: 16
         ) {
             HStack(spacing: 8) {
                 Image(systemName: "brain.head.profile")
@@ -153,7 +186,7 @@ struct WeeklyDashboardView: View {
                 Text("AI COACH")
                     .font(
                         .system(
-                            size: 14,
+                            size: 16,
                             weight: .bold,
                             design: .monospaced
                         )
@@ -161,11 +194,28 @@ struct WeeklyDashboardView: View {
                     .foregroundStyle(ColorTokens.primaryGreen)
             }
 
-            Text(
-                "Keep your pipeline updated after every recruiter call and interview. Accurate stages make your weekly insights more useful."
-            )
-            .font(.body)
-            .foregroundStyle(ColorTokens.highlightGreen)
+            VStack(alignment: .leading, spacing: 12) {
+                PracticeCard(
+                    title: "Interview Preparation",
+                    description: "Master common iOS interview questions with our curated question bank and mock interview guides",
+                    icon: "person.2.wave.2",
+                    color: ColorTokens.highlightGreen
+                )
+
+                PracticeCard(
+                    title: "Resume Optimization",
+                    description: "Get your resume noticed with ATS-friendly templates and keyword optimization techniques",
+                    icon: "doc.text",
+                    color: ColorTokens.primaryGreen
+                )
+
+                PracticeCard(
+                    title: "Networking Strategies",
+                    description: "Learn effective networking approaches for tech industry connections and referrals",
+                    icon: "person.3",
+                    color: ColorTokens.secondaryText
+                )
+            }
         }
         .frame(
             maxWidth: .infinity,
