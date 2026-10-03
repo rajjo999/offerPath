@@ -1,0 +1,23 @@
+{
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/App/OfferPathApp.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/OfferPathApp.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/OfferPathApp.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/OfferPathApp.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/OfferPathApp.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/OfferPathApp.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/App/Views/HomeDashboardView.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/HomeDashboardView.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/HomeDashboardView.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/HomeDashboardView.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/HomeDashboardView.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/HomeDashboardView.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Models/JobApplication.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/JobApplication.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/JobApplication.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/JobApplication.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/JobApplication.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/JobApplication.swiftdeps"
+  }
+}

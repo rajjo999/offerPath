@@ -1,0 +1,23 @@
+{
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/App/AppDelegate.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AppDelegate.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AppDelegate.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AppDelegate.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AppDelegate.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AppDelegate.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Features/Applications/Views/AddApplicationView.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AddApplicationView.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AddApplicationView.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AddApplicationView.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AddApplicationView.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/AddApplicationView.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Features/Pipeline/Views/ApplicationCard.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ApplicationCard.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ApplicationCard.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ApplicationCard.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ApplicationCard.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ApplicationCard.swiftdeps"
+  }
+}

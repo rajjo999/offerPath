@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<storekit version="1.0">
+  <metadata>
+    <identifier>OfferPath_StoreKitConfig</identifier>
+    <version>1.0</version>
+  </metadata>
+  <features>
+    <in-app-purchase>
+      <identifier>com.ranbir.offerpath.pro.monthly</identifier>
+      <name>OfferPath Pro Monthly</name>
+      <subtitle>Unlock premium features for $4.99/month</subtitle>
+      <consumable>false</consumable>
+      <subscription>
+        <subscription-group>
+          <identifier>OfferPathProGroup</identifier>
+          <access-level>1</access-level>
+        </subscription-group>
+        <price>4.99</price>
+        <price-locale>
+          <identifier>en_US</identifier>
+        </price-locale>
+        <subscription-period>
+          <unit>month</unit>
+          <value>1</value>
+        </subscription-period>
+      </subscription>
+      <localizations>
+        <localization>
+          <language>en</language>
+          <name>OfferPath Pro Monthly</name>
+          <subtitle>Unlock premium features for $4.99/month</subtitle>
+        </localization>
+      </localizations>
+    </in-app-purchase>
+    <in-app-purchase>
+      <identifier>com.ranbir.offerpath.pro.yearly</identifier>
+      <name>OfferPath Pro Yearly</name>
+      <subtitle>Unlock premium features for $49.99/year</subtitle>
+      <consumable>false</consumable>
+      <subscription>
+        <subscription-group>
+          <identifier>OfferPathProGroup</identifier>
+          <access-level>1</access-level>
+        </subscription-group>
+        <price>49.99</price>
+        <price-locale>
+          <identifier>en_US</identifier>
+        </price-locale>
+        <subscription-period>
+          <unit>year</unit>
+          <value>1</value>
+        </subscription-period>
+      </subscription>
+      <localizations>
+        <localization>
+          <language>en</language>
+          <name>OfferPath Pro Yearly</name>
+          <subtitle>Unlock premium features for $49.99/year</subtitle>
+        </localization>
+      </localizations>
+    </in-app-purchase>
+  </features>
+</storekit>

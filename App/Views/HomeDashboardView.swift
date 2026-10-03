@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import Foundation
 
 struct HomeDashboardView: View {
     @Environment(\.modelContext) private var modelContext
@@ -71,6 +72,20 @@ struct HomeDashboardView: View {
         }
     }
 
+    private var canAddMoreApplications: Bool {
+        // Free users get 10 applications per week, premium users get unlimited
+        return false // Placeholder - all users treated as free for now
+
+        let weeklyCount = applicationsThisWeek.count
+        return weeklyCount < 10
+    }
+
+    private var weeklyApplicationsRemaining: Int {
+        // Placeholder - all users treated as free for now
+        let used = applicationsThisWeek.count
+        return max(0, 10 - used)
+    }
+
     private var interviewCount: Int {
         applications.filter { application in
             application.stage == .interview
@@ -105,6 +120,7 @@ struct HomeDashboardView: View {
                 statsSection
                 todayScheduleSection
                 quickAddSection
+                upgradePrompt(applications: applications, isPremium: false)
             }
             .padding(.vertical)
         }
@@ -156,14 +172,19 @@ struct HomeDashboardView: View {
             Spacer()
 
             Button {
-                presetStage = .applied
-                showAddApplication = true
+                if canAddMoreApplications {
+                    presetStage = .applied
+                    showAddApplication = true
+                }
+                // If they can't add more, we could show an alert or just prevent the action
             } label: {
                 Image(systemName: "plus.circle.fill")
                     .font(.title2)
                     .foregroundStyle(ColorTokens.primaryGreen)
             }
             .accessibilityLabel("Add job application")
+            .disabled(!canAddMoreApplications)
+            .opacity(canAddMoreApplications ? 1.0 : 0.6)
         }
         .padding(.horizontal, Spacing.large)
         .padding(.vertical, Spacing.medium)
@@ -180,7 +201,7 @@ struct HomeDashboardView: View {
             StatCard(
                 title: "APPLICATIONS",
                 value: String(applications.count),
-                subtext: "\(applicationsThisWeek.count) this week",
+                subtext: "\(applicationsThisWeek.count)/10 this week",
                 icon: "doc.text",
                 color: ColorTokens.primaryGreen
             )
@@ -503,4 +524,63 @@ struct EventCard: View {
                 )
         }
     }
-}
+    }
+
+    // Show upgrade prompt when nearing limit
+    private func upgradePrompt(applications: [JobApplication], isPremium: Bool) -> some View {
+        let calendar = Calendar.current
+        guard let interval = calendar.dateInterval(of: .weekOfYear, for: Date()) else {
+            return AnyView(EmptyView())
+        }
+
+        let applicationsThisWeek = applications.filter { application in
+            application.appliedDate >= interval.start &&
+            application.appliedDate < interval.end
+        }
+
+        let weeklyApplicationsRemaining = isPremium ? Int.max : max(0, 10 - applicationsThisWeek.count)
+
+        if !isPremium && weeklyApplicationsRemaining <= 3 && !applications.isEmpty {
+            return AnyView(
+                VStack(spacing: Spacing.medium) {
+                    HStack(spacing: 8) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.orange)
+
+                        Text("You're approaching your weekly limit")
+                            .font(.system(size: 14, weight: .medium, design: .monospaced))
+                            .foregroundColor(.primary)
+                    }
+
+                    Text("Upgrade to Pro for unlimited applications and advanced features")
+                        .font(.system(size: 12, weight: .regular, design: .monospaced))
+                        .foregroundColor(ColorTokens.secondaryText)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+
+                    Button(action: {
+                        // This would need to be handled by presenting the store from the parent view
+                        // For now, we'll leave this as a visual cue
+                    }) {
+                        Text("Go Pro")
+                            .font(.system(size: 14, weight: .semibold, design: .monospaced))
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 36)
+                            .background(ColorTokens.primaryGreen)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                }
+                .padding()
+                .background(ColorTokens.surface)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 12)
+                        .stroke(ColorTokens.borderGreen, lineWidth: 1)
+                }
+                .padding(.horizontal, Spacing.large)
+            )
+        } else {
+            return AnyView(EmptyView())
+        }
+    }

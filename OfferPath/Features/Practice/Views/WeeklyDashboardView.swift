@@ -29,7 +29,10 @@ struct PracticeCard: View {
         .background(ColorTokens.surface)
         .overlay {
             RoundedRectangle(cornerRadius: 8)
-                .stroke(ColorTokens.borderGreen.opacity(0.5), lineWidth: 1)
+                .stroke(
+                    ColorTokens.borderGreen.opacity(0.5),
+                    lineWidth: 1
+                )
         }
     }
 }

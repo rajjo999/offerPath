@@ -1,0 +1,23 @@
+{
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Core/DesignSystem/ColorTokens.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ColorTokens.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ColorTokens.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ColorTokens.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ColorTokens.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/ColorTokens.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Models/CalendarEvent.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarEvent.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarEvent.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarEvent.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarEvent.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarEvent.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Services/Persistence/CalendarRepository.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarRepository.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarRepository.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarRepository.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarRepository.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/CalendarRepository.swiftdeps"
+  }
+}

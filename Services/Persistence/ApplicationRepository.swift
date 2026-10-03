@@ -1,6 +1,7 @@
 import Foundation
 import SwiftData
 
+@MainActor
 protocol ApplicationRepositoryProtocol {
     func fetchApplications() -> [JobApplication]
     func fetchApplications(

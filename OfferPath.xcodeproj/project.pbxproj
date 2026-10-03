@@ -16,6 +16,7 @@
 		4D077DDA24D97A4E5955FD2A /* SwiftUIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A0F65D888DEC369F2D5F0A /* SwiftUIExtensions.swift */; };
 		54A975B33D0820E98AB76402 /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C91897DA2168CC903E59676 /* Spacing.swift */; };
 		6C140F0AF5CCF4151EA9B85E /* ApplicationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91CD43883B8185FA85A53193 /* ApplicationRepository.swift */; };
+		F7A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5 /* SubscriptionManager.swift */; };
 		7E635B0301663A93CD7BBD12 /* JobApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75ECD751505320C40506B2D3 /* JobApplication.swift */; };
 		A6502010BA99A1F9FEE115F8 /* ApplicationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E32F78E87AC21616179C6E6B /* ApplicationCard.swift */; };
 		C21505E80707445927CBD3A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72DC25CA0E7BDB1AD6D792E /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 		90AA808353B4EE2FC36B843E /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		967890ABCDEF1234567890ABCDEF12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets.xcassets; sourceTree = "<group>"; };
 		91CD43883B8185FA85A53193 /* ApplicationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationRepository.swift; sourceTree = "<group>"; };
+		F7A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5 /* SubscriptionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		A8E72CE186F6EFA0DD0CC9FA /* WeeklyDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyDashboardView.swift; sourceTree = "<group>"; };
 		BB64AFF7AA55C7ECD6315AC2 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		DB3004F42D1F9FCE8C7420A6 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };

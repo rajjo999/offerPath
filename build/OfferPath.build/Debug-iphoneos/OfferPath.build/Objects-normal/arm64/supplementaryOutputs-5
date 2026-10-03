@@ -1,0 +1,23 @@
+{
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Core/DesignSystem/Shadows.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/Shadows.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/Shadows.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/Shadows.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/Shadows.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/Shadows.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Features/Pipeline/Views/PipelineView.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PipelineView.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PipelineView.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PipelineView.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PipelineView.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PipelineView.swiftdeps"
+  },
+  "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/Resources/PreviewData.swift" : {
+    "const-values" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PreviewData.swiftconstvalues",
+    "dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PreviewData.d",
+    "diagnostics" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PreviewData.dia",
+    "object" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PreviewData.o",
+    "swift-dependencies" : "/Users/ranbirsingh/Documents/AppStoreApps/OfferPath/build/OfferPath.build/Debug-iphoneos/OfferPath.build/Objects-normal/arm64/PreviewData.swiftdeps"
+  }
+}

@@ -3,6 +3,7 @@ import SwiftData
 
 // MARK: - Calendar Repository Protocol
 
+@MainActor
 protocol CalendarRepositoryProtocol {
     func fetchEvents() throws -> [StoredCalendarEvent]
     func fetchEvents(startingAfter date: Date) throws -> [StoredCalendarEvent]
